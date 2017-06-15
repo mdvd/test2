@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Богдановский Карьер</title>
+    <link href="css/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="page-header__container">
+        <div class="page-header__logo">
+          <a class="page-header__logo-link" href="#">
+            Богдановский
+            <span>Карьер</span>
+          </a>
+        </div>
+        <div class="page-header__menu-container">
+          <nav class="page-header__nav  main-nav">
+            <ul class="main-nav__list">
+              <li><a class="main-nav__link" href="#manufacture">производство</a></li>
+              <li><a class="main-nav__link" href="#address">адрес карьера</a></li>
+            </ul>
+          </nav>
+          <div class="page-header__feedback-container  feedback">
+            <button class="feedback__btn" type="button" name="feedback">Заказать звонок</button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <section class="slider">
+      <div class="slider__container">
+        <ul class="slider__list">
+          <li class="slider__item"><img class="slider__img" src="img/image1.jpg" alt="image1"></li>
+          <li class="slider__item"><img class="slider__img" src="img/image2.jpg" alt="image2"></li>
+        </ul>
+        <div class="slider__btn-container">
+          <div id="prevBtn" class="slider__btn  slider__btn--prev"></div>
+          <div id="nextBtn" class="slider__btn  slider__btn--next"></div>
+        </div>
+      </div>
+    </section>
+    <section id="manufacture" class="manufacture">
+      <div class="manufacture__container">
+        <div class="manufacture__contacts  contacts">
+          <h2 class="contacts__title">Контакты</h2>
+          <b>Звоните</b>
+          <a href="tel:88005559399">8 (800) <b>555-93-99</b></a>
+          <a href="tel:84956385585">8 (495) <b>638-55-85</b></a>
+        </div>
+        <div class="manufacture__desc">
+          <h2 class="manufacture__title">Производим и продаем щебень</h2>
+          <p>
+            Площадь участка 96,1 га. Щебень и гравий из плотных пород для строительных работ. Прочность соответствует
+            марке 800 (ДР-12). Запасы по гравию 28 %. Пески и пески-отсевы Богдановского-2 участка могут быть
+            использованы в качестве строительного и дорожного материала. Мощность толщи 12-22,1 метра. Уровень
+            грунтовых вод расположен ниже подошвы полезной толщи. Концентрация радионуклидов соответствует 1
+            классу СП 2.6.1.758-99.
+          </p>
+          <p>
+            <b>Щебень 20×40</b> пригоден в производстве бетона и изготовлении конструкций из него, для дорожного строи-
+            тельства при закладке фундамента зданий, при возведении производственных всех видов сооружений и др.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section id="address" class="address">
+      <div class="address__container">
+        <h2 class="address__title">Адрес карьера</h2>
+        <p class="address__desc">поселок Ханино, Суворовский район, Тульская область, Россия</p>
+      </div>
+      <div id="map" class="address__map"></div>
+    </section>
+    <footer class="page-footer">
+      <span class="page-footer__copyright">© 2015, Copyright</span>
+    </footer>
+    <div class="modal-callback">
+      <button class="modal-callback__close" type="button" name="close"></button>
+      <h3>Заказать звонок</h3>
+      <p>
+        Площадь участка 96,1 га. Щебень и гравий из плотных пород для строительных работ. Прочность соответствует
+        марке 800 (ДР-12). Запасы по гравию 28 %. Пески и пески-отсевы Богдановского-2 участка могут быть
+        использованы в качестве строительного и дорожного материала.
+      </p>
+      <form class="modal-callback__form" action="" method="post">
+        <input id="phone" type="tel" name="phone">
+        <label class="modal-callback__label" for="phone">Введите свой номер:</label>
+        <button class="modal-callback__btn" type="submit" name="send">Отправить</button>
+      </form>
+    </div>
+    <div class="modal-overlay"></div>
+    <script>
+      function initMap() {
+        var myLatLng = {lat: 54.209302, lng: 36.622225};
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: myLatLng,
+          disableDefaultUI: true
+      });
+
+      var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: "Ханино"
+      });
+      }
+    </script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLeVxVzHW6bVvhe5smIQ79alFHfAYGUko&callback=initMap">
+    </script>
+    <script src="js/script.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script>
+      var slideNow = 1;
+      var slideCount = $('.slider__list').children().length;
+      var translateWidth = 0;
+
+      $(document).ready(function() {
+
+        $('#nextBtn').click(function() {
+          nextSlide();
+        });
+
+        $('#prevBtn').click(function() {
+          prevSlide();
+        });
+
+      });
+
+
+      function nextSlide() {
+        if (slideNow == slideCount || slideNow <= 0 || slideNow > slideCount) {
+            $('.slider__list').css('transform', 'translate(0, 0)');
+            slideNow = 1;
+        } else {
+            translateWidth = -$('.slider__container').width() * (slideNow);
+            $('.slider__list').css({
+                'transform': 'translate(' + translateWidth + 'px, 0)',
+                '-webkit-transform': 'translate(' + translateWidth + 'px, 0)',
+                '-ms-transform': 'translate(' + translateWidth + 'px, 0)',
+            });
+            slideNow++;
+        }
+      }
+
+      function prevSlide() {
+        if (slideNow == 1 || slideNow <= 0 || slideNow > slideCount) {
+            translateWidth = -$('.slider__container').width() * (slideCount - 1);
+            $('.slider__list').css({
+                'transform': 'translate(' + translateWidth + 'px, 0)',
+                '-webkit-transform': 'translate(' + translateWidth + 'px, 0)',
+                '-ms-transform': 'translate(' + translateWidth + 'px, 0)',
+            });
+            slideNow = slideCount;
+        } else {
+            translateWidth = -$('.slider__container').width() * (slideNow - 2);
+            $('.slider__list').css({
+                'transform': 'translate(' + translateWidth + 'px, 0)',
+                '-webkit-transform': 'translate(' + translateWidth + 'px, 0)',
+                '-ms-transform': 'translate(' + translateWidth + 'px, 0)',
+            });
+            slideNow--;
+        }
+      }
+
+      $(document).ready(function(){
+        $(".main-nav__list").on("click","a", function (event) {
+          event.preventDefault();
+          var id  = $(this).attr('href'),
+           top = $(id).offset().top;
+          $('body,html').animate({scrollTop: top}, 500);
+        });
+      });
+    </script>
+  </body>
+</html>
